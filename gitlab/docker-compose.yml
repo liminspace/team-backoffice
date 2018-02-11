@@ -38,6 +38,17 @@ services:
         registry_nginx['real_ip_recursive'] = 'on'
 
         gitlab_rails['time_zone'] = '${TIME_ZONE}'
+
+        gitlab_rails['smtp_enable'] = true
+        gitlab_rails['smtp_address'] = "${NETWORK_HOST_IP}"
+        gitlab_rails['smtp_port'] = 25
+        gitlab_rails['smtp_user_name'] = "gitlab@${HOSTNAME}"
+        # gitlab_rails['smtp_password'] = ""
+        # gitlab_rails['smtp_domain'] = "${HOSTNAME}"
+        # gitlab_rails['smtp_authentication'] = "login"
+        # gitlab_rails['smtp_enable_starttls_auto'] = true
+        # gitlab_rails['smtp_tls'] = false
+
       VIRTUAL_HOST: "${GITLAB_HOSTNAME},${REGISTRY_HOSTNAME}"
       LETSENCRYPT_HOST: "${GITLAB_HOSTNAME},${REGISTRY_HOSTNAME}"
       LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
