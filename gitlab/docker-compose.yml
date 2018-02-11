@@ -3,7 +3,7 @@ services:
   gitlab:
     restart: always
     image: gitlab/gitlab-ce:latest
-    hostname: "${IMAGE_HOSTNAME}"
+    hostname: "${HOSTNAME}"
     extra_hosts:
       - "${REGISTRY_HOSTNAME}:127.0.1.1"
     container_name: gitlab
