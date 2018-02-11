@@ -1,2 +1,11 @@
 .idea/
 .env
+
+gitlab/config/
+gitlab/logs/
+gitlab/data/
+
+nginx/conf.d/
+nginx/vhost.d/
+nginx/share_html/
+nginx/certs/
