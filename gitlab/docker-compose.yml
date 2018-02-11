@@ -1,0 +1,56 @@
+version: "3"
+services:
+  gitlab:
+    restart: always
+    image: gitlab/gitlab-ce:latest
+    hostname: "${IMAGE_HOSTNAME}"
+    extra_hosts:
+      - "${REGISTRY_HOSTNAME}:127.0.1.1"
+    container_name: gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://${HOSTNAME}'
+        nginx['listen_port'] = 80
+        nginx['listen_https'] = false
+        nginx['proxy_set_headers'] = {
+          "Host" => "$$http_host",
+          "X-Real-IP" => "$$remote_addr",
+          "X-Forwarded-For" => "$$proxy_add_x_forwarded_for",
+          "X-Forwarded-Proto" => "https",
+          "X-Forwarded-Ssl" => "on"
+        }
+        nginx['real_ip_trusted_addresses'] = ${REAL_IP_TRUSTED_ADDRESSES}
+        nginx['real_ip_header'] = 'X-Real-IP'
+        nginx['real_ip_recursive'] = 'on'
+
+        registry_external_url 'https://${REGISTRY_HOSTNAME}'
+        registry_nginx['listen_port'] = 80
+        registry_nginx['listen_https'] = false
+        registry_nginx['proxy_set_headers'] = {
+          "Host" => "$$http_host",
+          "X-Real-IP" => "$$remote_addr",
+          "X-Forwarded-For" => "$$proxy_add_x_forwarded_for",
+          "X-Forwarded-Proto" => "https",
+          "X-Forwarded-Ssl" => "on"
+        }
+        registry_nginx['real_ip_trusted_addresses'] = ${REAL_IP_TRUSTED_ADDRESSES}
+        registry_nginx['real_ip_header'] = 'X-Real-IP'
+        registry_nginx['real_ip_recursive'] = 'on'
+
+        gitlab_rails['time_zone'] = '${TIME_ZONE}'
+      VIRTUAL_HOST: "${GITLAB_HOSTNAME},${REGISTRY_HOSTNAME}"
+      LETSENCRYPT_HOST: "${GITLAB_HOSTNAME},${REGISTRY_HOSTNAME}"
+      LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
+    expose:
+      - 80
+    ports:
+      - "0.0.0.0:${SSH_PORT}:22"
+    volumes:
+      - ./config:/etc/gitlab
+      - ./logs:/var/log/gitlab
+      - ./data:/var/opt/gitlab
+
+networks:
+  default:
+    external:
+      name: "${NETWORK}"
