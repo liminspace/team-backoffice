@@ -5,7 +5,8 @@ gitlab/config/
 gitlab/logs/
 gitlab/data/
 
-nginx/conf.d/
+nginx/conf.d/*
+!nginx/conf.d/conf.conf
 nginx/vhost.d/
 nginx/share_html/
 nginx/certs/
