@@ -280,9 +280,7 @@ server {
 		include fastcgi.conf;
 		fastcgi_pass {{ trim $upstream_name }};
 		{{ else }}
-		{{ if $.Env.NGINX_PROXY_PASS_HEADERS }}
-		{{ range $.Env.NGINX_PROXY_PASS_HEADERS }};{{ end }}
-		{{ end }}
+		{{ if $.Env.NGINX_PROXY_PASS_HEADERS }}{{ $.Env.NGINX_PROXY_PASS_HEADERS }}{{ end }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
 		{{ end }}
 
@@ -330,9 +328,7 @@ server {
 		include fastcgi.conf;
 		fastcgi_pass {{ trim $upstream_name }};
 		{{ else }}
-		{{ if $.Env.NGINX_PROXY_PASS_HEADERS }}
-		{{ range $.Env.NGINX_PROXY_PASS_HEADERS }};{{ end }}
-		{{ end }}
+		{{ if $.Env.NGINX_PROXY_PASS_HEADERS }}{{ $.Env.NGINX_PROXY_PASS_HEADERS }}{{ end }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
 		{{ end }}
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
