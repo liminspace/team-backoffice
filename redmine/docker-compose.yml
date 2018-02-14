@@ -18,10 +18,10 @@ services:
       REDMINE_DB_PASSWORD: "${DB_PASS}"
     volumes:
       - ./files:/usr/src/redmine/files
-      - ./config:/usr/src/redmine/config
       - ./log:/usr/src/redmine/log
       - ./plugins:/usr/src/redmine/plugins
       - ./themes:/usr/src/redmine/public/themes
+      - ./config/configuration.yml:/usr/src/redmine/config/configuration.yml
 
   postgres:
     image: postgres:9.6

@@ -11,9 +11,9 @@ nginx/vhost.d/
 nginx/share_html/
 nginx/certs/
 
-redmine/postgres_data/
+redmine/config/configuration.yml
 redmine/files/
-redmine/config/
 redmine/log/
 redmine/plugins/
 redmine/themes/
+redmine/postgres_data/
