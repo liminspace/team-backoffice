@@ -10,6 +10,8 @@ services:
     environment:
       VIRTUAL_HOST: "${REDMINE_HOSTNAME}"
       VIRTUAL_PORT: 3000
+      NGINX_PROXY_PASS_HEADERS:
+        - "proxy_set_header CLIENT_IP $remote_addr;"
       LETSENCRYPT_HOST: "${REDMINE_HOSTNAME}"
       LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
       REDMINE_DB_POSTGRES: "${DB_POSTGRES_HOST}"

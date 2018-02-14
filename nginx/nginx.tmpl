@@ -1,4 +1,4 @@
-# This template is copied from https://github.com/jwilder/nginx-proxy (2018-02-10)
+# Based on https://github.com/jwilder/nginx-proxy (2018-02-10)
 
 {{ $CurrentContainer := where $ "ID" .Docker.CurrentContainerID | first }}
 
@@ -280,6 +280,9 @@ server {
 		include fastcgi.conf;
 		fastcgi_pass {{ trim $upstream_name }};
 		{{ else }}
+		{{ if $.Env.NGINX_PROXY_PASS_HEADERS }}
+		{{ range $.Env.NGINX_PROXY_PASS_HEADERS }};{{ end }}
+		{{ end }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
 		{{ end }}
 
@@ -327,6 +330,9 @@ server {
 		include fastcgi.conf;
 		fastcgi_pass {{ trim $upstream_name }};
 		{{ else }}
+		{{ if $.Env.NGINX_PROXY_PASS_HEADERS }}
+		{{ range $.Env.NGINX_PROXY_PASS_HEADERS }};{{ end }}
+		{{ end }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
 		{{ end }}
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
