@@ -1,11 +1,5 @@
 #!/bin/bash
 
-cat_tpl() {
-    echo "cat << EOT"
-    cat "$1"
-    echo "EOT"
-}
+export $(cat .env | xargs)
 
-source ./.env
-
-cat_tpl config/configuration.yml.tpl | bash > config/configuration.yml
+envsubst '${NETWORK_HOST_IP}' < config/configuration.yml.tpl > config/configuration.yml
