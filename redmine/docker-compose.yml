@@ -1,0 +1,39 @@
+version: "3"
+services:
+  redmine:
+    image: redmine:latest
+    depends_on:
+      - postgres
+    restart: always
+    expose:
+      - 3000
+    environment:
+      VIRTUAL_HOST: "${REDMINE_HOSTNAME}"
+      VIRTUAL_PORT: 3000
+      LETSENCRYPT_HOST: "${REDMINE_HOSTNAME}"
+      LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
+      REDMINE_DB_POSTGRES: "${DB_POSTGRES_HOST}"
+      REDMINE_DB_DATABASE: "${DB_NAME}"
+      REDMINE_DB_USERNAME: "${DB_USER}"
+      REDMINE_DB_PASSWORD: "${DB_PASS}"
+    volumes:
+      - ./files:/usr/src/redmine/files
+      - ./config:/usr/src/redmine/config
+      - ./log:/usr/src/redmine/log
+      - ./plugins:/usr/src/redmine/plugins
+      - ./themes:/usr/src/redmine/public/themes
+
+  postgres:
+    image: postgres:9.6
+    restart: always
+    environment:
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASS}"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+networks:
+  default:
+    external:
+      name: ${NETWORK}

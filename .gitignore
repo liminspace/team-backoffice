@@ -10,3 +10,10 @@ nginx/conf.d/*
 nginx/vhost.d/
 nginx/share_html/
 nginx/certs/
+
+redmine/postgres_data/
+redmine/files/
+redmine/config/
+redmine/log/
+redmine/plugins/
+redmine/themes/
