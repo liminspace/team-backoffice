@@ -23,7 +23,7 @@ services:
       - ./plugins:/usr/src/redmine/plugins
       - ./themes:/usr/src/redmine/public/themes
       - ./config/configuration.yml:/usr/src/redmine/config/configuration.yml
-      - ./config/secret.yml:/usr/src/redmine/config/secret.yml
+      - ./config/initializers/secret_token.rb:/usr/src/redmine/config/initializers/secret_token.rb
 
   postgres:
     image: postgres:9.6
