@@ -23,6 +23,7 @@ services:
       - ./plugins:/usr/src/redmine/plugins
       - ./themes:/usr/src/redmine/public/themes
       - ./config/configuration.yml:/usr/src/redmine/config/configuration.yml
+      - ./config/secret.yml:/usr/src/redmine/config/secret.yml
 
   postgres:
     image: postgres:9.6

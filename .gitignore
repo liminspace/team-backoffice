@@ -12,6 +12,7 @@ nginx/share_html/
 nginx/certs/
 
 redmine/config/configuration.yml
+redmine/config/secret.yml
 redmine/files/
 redmine/log/
 redmine/plugins/

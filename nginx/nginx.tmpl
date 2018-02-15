@@ -187,6 +187,8 @@ upstream {{ $upstream_name }} {
 
 {{ $is_https := (and (ne $https_method "nohttps") (ne $cert "") (exists (printf "/etc/nginx/certs/%s.crt" $cert)) (exists (printf "/etc/nginx/certs/%s.key" $cert))) }}
 
+{{ $custom_proxy_headers := (first (groupByKeys $containers "Env.NGINX_PROXY_PASS_HEADERS")) }}
+
 {{ if $is_https }}
 
 {{ if eq $https_method "redirect" }}
@@ -272,7 +274,7 @@ server {
 	{{ end }}
 
 	location / {
-	    {{ if $.Env.NGINX_PROXY_PASS_HEADERS }}{{ $.Env.NGINX_PROXY_PASS_HEADERS }}{{ end }}
+		{{ if $custom_proxy_headers }}{{ trim $custom_proxy_headers }}{{ end }}
 		{{ if eq $proto "uwsgi" }}
 		include uwsgi_params;
 		uwsgi_pass {{ trim $proto }}://{{ trim $upstream_name }};
@@ -320,7 +322,7 @@ server {
 	{{ end }}
 
 	location / {
-	    {{ if $.Env.NGINX_PROXY_PASS_HEADERS }}{{ $.Env.NGINX_PROXY_PASS_HEADERS }}{{ end }}
+		{{ if $custom_proxy_headers }}{{ trim $custom_proxy_headers }}{{ end }}
 		{{ if eq $proto "uwsgi" }}
 		include uwsgi_params;
 		uwsgi_pass {{ trim $proto }}://{{ trim $upstream_name }};
