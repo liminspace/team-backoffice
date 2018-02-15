@@ -22,6 +22,7 @@ services:
       - ./log:/usr/src/redmine/log
       - ./plugins:/usr/src/redmine/plugins
       - ./themes:/usr/src/redmine/public/themes
+      - ./config/additional_environment.rb:/usr/src/redmine/config/additional_environment.rb
       - ./config/configuration.yml:/usr/src/redmine/config/configuration.yml
       - ./config/initializers/secret_token.rb:/usr/src/redmine/config/initializers/secret_token.rb
 
