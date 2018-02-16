@@ -10,10 +10,9 @@ services:
     environment:
       VIRTUAL_HOST: "${REDMINE_HOSTNAME}"
       VIRTUAL_PORT: 3000
-      NGINX_PROXY_PASS_HEADERS: "proxy_set_header CLIENT_IP $$remote_addr;"
       LETSENCRYPT_HOST: "${REDMINE_HOSTNAME}"
       LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
-      REDMINE_DB_POSTGRES: "${DB_POSTGRES_HOST}"
+      REDMINE_DB_POSTGRES: postgres
       REDMINE_DB_DATABASE: "${DB_NAME}"
       REDMINE_DB_USERNAME: "${DB_USER}"
       REDMINE_DB_PASSWORD: "${DB_PASS}"
@@ -22,7 +21,6 @@ services:
       - ./log:/usr/src/redmine/log
       - ./plugins:/usr/src/redmine/plugins
       - ./themes:/usr/src/redmine/public/themes
-      - ./config/additional_environment.rb:/usr/src/redmine/config/additional_environment.rb
       - ./config/configuration.yml:/usr/src/redmine/config/configuration.yml
       - ./config/initializers/secret_token.rb:/usr/src/redmine/config/initializers/secret_token.rb
 

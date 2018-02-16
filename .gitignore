@@ -18,3 +18,5 @@ redmine/log/
 redmine/plugins/
 redmine/themes/
 redmine/postgres_data/
+
+notes.local.txt
