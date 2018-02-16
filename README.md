@@ -122,7 +122,7 @@ $ docker-compose up -d
  * `SMTP_DOMAIN` -- SMTP-domain to send emails. See settings of your email-server on the host machine.
  * `EMAIL_FROM` -- the email from which Gitlab will send emails.
  * `EMAIL_DISPLAY_NAME` -- display name for `EMAIL_FROM`.
- * `EMAIL_REPLY_TO` -- email that will be defined in header REPLY-TO in emails Gitlab sends.
+ * `EMAIL_REPLY_TO` -- email that will be defined in header Reply-To in emails Gitlab sends.
  * `EMAIL_SUBJECT_SUFFIX` -- prefix in emails Gitlab sends.
  * `TIME_ZONE` -- time zone to show correct time in Gitlab.
 
