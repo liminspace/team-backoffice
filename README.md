@@ -42,7 +42,6 @@ $ cp .env.example .env
 Set up `.env` or just see it.
 
 Create a docker-network with name from option `NETWORK` in your `.env` file:
-
 ```
 $ docker network create --subnet=172.212.0.0/16 nginx-proxy
 ```
@@ -162,3 +161,11 @@ $ docker-compose up -d
  * `DB_NAME` -- database name that redmine uses.
  * `DB_USER` -- username to connect redmine's database.
  * `DB_PASS` -- password to connect redmine's database.
+
+
+### How to update the services
+
+Go to the directory you want to update the service there and execute the command:
+```
+$ docker-compose down && docker-compose pull && docker-compose up -d && docker image prune -af
+```
