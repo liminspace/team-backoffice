@@ -1,5 +1,5 @@
 # team-backoffice
-The recipe of easy installing Gitlab + Gitlab Registry + Redmine + Let's Encrypt using Docker and Docker Compose
+The recipe of easy installing GitLab + GitLab Registry + Redmine + TeamPass + Let's Encrypt using Docker and Docker Compose
 
 
 ### Requirements:
@@ -71,12 +71,12 @@ and restart `exim4`:
 $ service exim4 restart
 ```
 
-##### Options in .env for Nginx
+##### Options in `.env` for Nginx
 
  * `NETWORK` -- name of virtual network to connect docker-containers with each other.
 
 
-### Gitlab + Gitlab Registry
+### GitLab + GitLab Registry
 
 Go to the directory:
 ```
@@ -88,7 +88,7 @@ Create `.env` file from example one:
 $ cp .env.example .env
 ```
 
-If you want to use 22 post as gitlab's SSH, you need change the SSH-port of the host machine:
+If you want to use 22 post as GitLab's SSH, you need change the SSH-port of the host machine:
 ```
 $ nano /etc/ssh/sshd_config
 Port 2299
@@ -109,21 +109,21 @@ $ docker-compose up -d
 
 *it will take some time, be patient
 
-##### Options in .env for Gitlab
+##### Options in `.env` for GitLab
 
- * `GITLAB_HOSTNAME` -- domain of your Gitlab.
- * `REGISTRY_HOSTNAME` -- domain of Gitlab Registry.
+ * `GITLAB_HOSTNAME` -- domain of your GitLab.
+ * `REGISTRY_HOSTNAME` -- domain of GitLab Registry.
  * `LETSENCRYPT_EMAIL` -- email that will be used during getting SSL-certificates of Let's Encrypt.
- * `SSH_PORT` -- Gitlab's SSH port. It must be another than the port used on the host machine.
+ * `SSH_PORT` -- GitLab's SSH port. It must be another than the port used on the host machine.
  * `NETWORK` -- docker-network name which is the same as used in Nginx (see above).
  * `NETWORK_HOST_IP` -- the first IP of docker-network subnet (see above).
  * `NGINX_REAL_IP_TRUSTED_ADDRESSES` -- the mask of docker-network (see above).
  * `SMTP_DOMAIN` -- SMTP-domain to send emails. See settings of your email-server on the host machine.
- * `EMAIL_FROM` -- the email from which Gitlab will send emails.
+ * `EMAIL_FROM` -- the email from which GitLab will send emails.
  * `EMAIL_DISPLAY_NAME` -- display name for `EMAIL_FROM`.
- * `EMAIL_REPLY_TO` -- email that will be defined in header Reply-To in emails Gitlab sends.
- * `EMAIL_SUBJECT_SUFFIX` -- prefix in emails Gitlab sends.
- * `TIME_ZONE` -- time zone to show correct time in Gitlab.
+ * `EMAIL_REPLY_TO` -- email that will be defined in header Reply-To in emails GitLab sends.
+ * `EMAIL_SUBJECT_SUFFIX` -- prefix in emails GitLab sends.
+ * `TIME_ZONE` -- time zone to show correct time in GitLab.
 
 
 ### Redmine
@@ -152,15 +152,65 @@ $ docker-compose up -d
 
 *it will take some time, be patient
 
-##### Options in .env for Redmine
+##### Options in `.env` for Redmine
 
  * `REDMINE_HOSTNAME` -- domain of your Redmine.
  * `LETSENCRYPT_EMAIL` -- email that will be used during getting SSL-certificates of Let's Encrypt.
  * `NETWORK` -- docker-network name which is the same as used in Nginx (see above).
  * `NETWORK_HOST_IP` -- the first IP of docker-network subnet (see above).
- * `DB_NAME` -- database name that redmine uses.
- * `DB_USER` -- username to connect redmine's database.
- * `DB_PASS` -- password to connect redmine's database.
+ * `DB_NAME` -- database name that Redmine uses.
+ * `DB_USER` -- username to connect Redmine's database.
+ * `DB_PASS` -- password to connect Redmine's database.
+
+
+### TeamPass
+
+Go to the directory:
+```
+$ cd /srv/team-backoffice/teampass
+```
+
+Create `.env` file from example one:
+```
+$ cp .env.example .env
+```
+
+Set up all configs in `.env` file.
+
+Run service:
+```
+$ docker-compose up -d
+```
+
+Go to your https://`TEAMPASS_HOSTNAME` and follow steps there.
+During steps you have to set these options:
+
+ * Absolute path to teampass folder: don't change it, keep default value
+ * Full URL to teampass: `https://teampass.example.com` (use the domain in `TEAMPASS_HOSTNAME` in `.env`)
+ * Database Host: `mysql`
+ * Database Port: `3306`
+ * Other Database fields: see your `.env` file
+ * Absolute path to SaltKey: `/var/www/html/sk`
+
+Go to `Settings` -> `Email` and set up:
+
+ * SMTP server address: value of `NETWORK_HOST_IP` in `.env`
+ * SMTP server port: `25`  (or change it according to your email server)
+ * From: Email address: `teampass@example.com` (set email with domain of your email server)
+ * From: Display name: `TeamPass MyTeam` (set display name you like)
+
+See TeamPass' documentation: https://teampass.readthedocs.io/en/latest/
+
+##### Options in `.env` for TeamPass
+
+ * `TEAMPASS_HOSTNAME` -- domain of your TeamPass.
+ * `LETSENCRYPT_EMAIL` -- email that will be used during getting SSL-certificates of Let's Encrypt.
+ * `NETWORK` -- docker-network name which is the same as used in Nginx (see above).
+ * `NETWORK_HOST_IP` -- the first IP of docker-network subnet (see above).
+ * `DB_NAME` -- database name that TeamPass uses.
+ * `DB_USER` -- username to connect TeamPass' database.
+ * `DB_PASS` -- password to connect TeamPass' database.
+ * `DB_ROOT_PASS` -- password for `root` user of MySQL that TeamPass uses.
 
 
 ### How to update the services

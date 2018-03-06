@@ -19,4 +19,7 @@ redmine/plugins/
 redmine/themes/
 redmine/postgres_data/
 
+teampass/files/
+teampass/mysql_data/
+
 notes.local.txt
