@@ -1,5 +1,9 @@
 # team-backoffice
-The recipe of easy installing GitLab + GitLab Registry + Redmine + TeamPass + Let's Encrypt using Docker and Docker Compose
+The recipe of easy installing [GitLab](https://about.gitlab.com/) +
+[GitLab Registry](https://docs.gitlab.com/ee/user/project/container_registry.html) +
+[Redmine](https://www.redmine.org/) + [TeamPass](https://teampass.net/) +
+[Let's Encrypt](https://letsencrypt.org/) using [Docker](https://www.docker.com/)
+and [Docker Compose](https://docs.docker.com/compose/)
 
 
 ### Requirements:
