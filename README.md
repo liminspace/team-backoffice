@@ -198,7 +198,7 @@ During steps you have to set these options:
 
 Go to `Settings` -> `Email` and set up:
 
- * SMTP server address: value of `NETWORK_HOST_IP` in `.env`
+ * SMTP server address: the first IP of docker-network subnet (see above)
  * SMTP server port: `25`  (or change it according to your email server)
  * From: Email address: `teampass@example.com` (set email with domain of your email server)
  * From: Display name: `TeamPass MyTeam` (set display name you like)
@@ -210,7 +210,6 @@ See TeamPass' documentation: https://teampass.readthedocs.io/en/latest/
  * `TEAMPASS_HOSTNAME` -- domain of your TeamPass.
  * `LETSENCRYPT_EMAIL` -- email that will be used during getting SSL-certificates of Let's Encrypt.
  * `NETWORK` -- docker-network name which is the same as used in Nginx (see above).
- * `NETWORK_HOST_IP` -- the first IP of docker-network subnet (see above).
  * `DB_NAME` -- database name that TeamPass uses.
  * `DB_USER` -- username to connect TeamPass' database.
  * `DB_PASS` -- password to connect TeamPass' database.
