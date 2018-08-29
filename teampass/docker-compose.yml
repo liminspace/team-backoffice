@@ -1,7 +1,7 @@
 version: "3"
 services:
   teampass:
-    image: teampass/teampass
+    image: teampass/teampass:latest
     restart: always
     environment:
       VIRTUAL_HOST: "${TEAMPASS_HOSTNAME}"

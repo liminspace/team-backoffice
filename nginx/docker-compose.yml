@@ -1,10 +1,10 @@
 version: "3"
 services:
   nginx:
-    image: nginx
+    image: nginx:stable
+    container_name: nginx
     labels:
       com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
-    container_name: nginx
     restart: always
     ports:
       - 80:80
@@ -17,8 +17,8 @@ services:
 
   nginx-docker-gen:
     image: jwilder/docker-gen
-    command: -notify-sighup nginx -watch -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
     container_name: nginx-docker-gen
+    command: -notify-sighup nginx -watch -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
     restart: always
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
@@ -29,7 +29,7 @@ services:
       - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
 
   nginx-letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
+    image: jrcs/letsencrypt-nginx-proxy-companion:stable
     container_name: nginx-letsencrypt
     restart: always
     volumes:
