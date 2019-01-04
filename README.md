@@ -220,5 +220,5 @@ See TeamPass' documentation: https://teampass.readthedocs.io/en/latest/
 
 Go to the directory you want to update the service there and execute the command:
 ```
-$ docker-compose down && docker-compose pull && docker-compose up -d && docker image prune -af
+$ docker-compose pull && docker-compose up -d && docker image prune -af
 ```
