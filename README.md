@@ -206,6 +206,9 @@ $ docker-compose up -d
  * `BW_ROCKET_LIMITS` -- Rocket's limits. https://rocket.rs/v0.4/guide/configuration/#data-limits
  * `BW_SHOW_PASSWORD_HINT` -- allow or deny to show password hint.
  * `BW_WEB_VAULT_ENABLED` -- allow or deny to web-version of vault.
+ 
+If you have a problem with sending emails by using exim4 try to add option `IGNORE_SMTP_LINE_LENGTH_LIMIT=1` 
+into `/etc/exim4/update-exim4.conf.conf`.
 
 More information: https://github.com/dani-garcia/bitwarden_rs/wiki
 
