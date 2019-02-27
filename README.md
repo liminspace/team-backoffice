@@ -1,8 +1,10 @@
 # team-backoffice
 The recipe of easy installing [GitLab](https://about.gitlab.com/) +
 [GitLab Registry](https://docs.gitlab.com/ee/user/project/container_registry.html) +
-[Redmine](https://www.redmine.org/) + [TeamPass](https://teampass.net/) +
-[Let's Encrypt](https://letsencrypt.org/) using [Docker](https://www.docker.com/)
+[Redmine](https://www.redmine.org/) + 
+[Bitwarden](https://bitwarden.com/) +
+[Let's Encrypt](https://letsencrypt.org/) 
+using [Docker](https://www.docker.com/)
 and [Docker Compose](https://docs.docker.com/compose/)
 
 
@@ -167,11 +169,13 @@ $ docker-compose up -d
  * `DB_PASS` -- password to connect Redmine's database.
 
 
-### TeamPass
+### Bitwarden (Rust server implementation)
+
+Project's repo: https://github.com/dani-garcia/bitwarden_rs
 
 Go to the directory:
 ```
-$ cd /srv/team-backoffice/teampass
+$ cd /srv/team-backoffice/bitwarden_rs
 ```
 
 Create `.env` file from example one:
@@ -186,34 +190,24 @@ Run service:
 $ docker-compose up -d
 ```
 
-Go to your https://`TEAMPASS_HOSTNAME` and follow steps there.
-During steps you have to set these options:
+##### Options in `.env` for Bitwarden
 
- * Absolute path to teampass folder: don't change it, keep default value
- * Full URL to teampass: `https://teampass.example.com` (use the domain in `TEAMPASS_HOSTNAME` in `.env`)
- * Database Host: `mysql`
- * Database Port: `3306`
- * Other Database fields: see your `.env` file
- * Absolute path to SaltKey: `/var/www/html/sk`
-
-Go to `Settings` -> `Email` and set up:
-
- * SMTP server address: the first IP of docker-network subnet (see above)
- * SMTP server port: `25`  (or change it according to your email server)
- * From: Email address: `teampass@example.com` (set email with domain of your email server)
- * From: Display name: `TeamPass MyTeam` (set display name you like)
-
-See TeamPass' documentation: https://teampass.readthedocs.io/en/latest/
-
-##### Options in `.env` for TeamPass
-
- * `TEAMPASS_HOSTNAME` -- domain of your TeamPass.
+ * `BITWARDEN_RS_HOSTNAME` -- domain of your Bitwarden.
  * `LETSENCRYPT_EMAIL` -- email that will be used during getting SSL-certificates of Let's Encrypt.
  * `NETWORK` -- docker-network name which is the same as used in Nginx (see above).
- * `DB_NAME` -- database name that TeamPass uses.
- * `DB_USER` -- username to connect TeamPass' database.
- * `DB_PASS` -- password to connect TeamPass' database.
- * `DB_ROOT_PASS` -- password for `root` user of MySQL that TeamPass uses.
+ * `NETWORK_HOST_IP` -- the first IP of docker-network subnet (see above).
+ * `BW_DOMAIN` -- URL (with protocol and domain) to Bitwarden.
+ * `BW_SMTP_*` -- SMTP settings for mailing.
+ * `BW_EMAIL_FROM` -- the email from which Bitwarden will send emails.
+ * `BW_EMAIL_FROM_NAME` -- display name for `BW_EMAIL_FROM`.
+ * `BW_ADMIN_TOKEN` -- security token to activate admin page.
+ * `BW_SIGNUPS_ALLOWED` -- allow or deny to sign up new users.
+ * `BW_INVITATIONS_ALLOWED` -- allow or deny to invite new users (even for admins).
+ * `BW_ROCKET_LIMITS` -- Rocket's limits. https://rocket.rs/v0.4/guide/configuration/#data-limits
+ * `BW_SHOW_PASSWORD_HINT` -- allow or deny to show password hint.
+ * `BW_WEB_VAULT_ENABLED` -- allow or deny to web-version of vault.
+
+More information: https://github.com/dani-garcia/bitwarden_rs/wiki
 
 
 ### How to update the services

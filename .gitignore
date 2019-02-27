@@ -1,6 +1,8 @@
 .idea/
 .env
 
+bitwarden_rs/data/
+
 gitlab/config/
 gitlab/logs/
 gitlab/data/
@@ -18,8 +20,5 @@ redmine/log/
 redmine/plugins/
 redmine/themes/
 redmine/postgres_data/
-
-teampass/files/
-teampass/mysql_data/
 
 notes.local.txt
