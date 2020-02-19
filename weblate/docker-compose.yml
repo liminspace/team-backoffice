@@ -1,0 +1,44 @@
+version: '3'
+services:
+  weblate:
+    image: weblate/weblate
+    restart: always
+    volumes:
+      - weblate_data:/app/data
+    depends_on:
+      - database
+      - cache
+    env_file:
+      - .env
+    environment:
+      VIRTUAL_HOST: "${WEBLATE_HOSTNAME}"
+      VIRTUAL_PORT: 8080
+      LETSENCRYPT_HOST: "${WEBLATE_HOSTNAME}"
+      LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
+
+  database:
+    image: postgres:11
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+  cache:
+    image: redis:4
+    restart: always
+    volumes:
+      - redis_data:/data
+    env_file:
+      - .env
+    command: ["redis-server", "--appendonly", "yes"]
+
+networks:
+  default:
+    external:
+      name: "${NETWORK}"
+
+volumes:
+  weblate_data: {}
+  postgres_data: {}
+  redis_data: {}

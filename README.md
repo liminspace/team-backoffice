@@ -1,9 +1,9 @@
 # team-backoffice
 The recipe of easy installing [GitLab](https://about.gitlab.com/),
 [GitLab Registry](https://docs.gitlab.com/ee/user/project/container_registry.html),
+[WebLate](https://weblate.org/en/),
 [Redmine](https://www.redmine.org/),
 [Bitwarden](https://bitwarden.com/),
-[TeamPass](https://teampass.net/),
 [Let's Encrypt](https://letsencrypt.org/) 
 using [Docker](https://www.docker.com/)
 and [Docker Compose](https://docs.docker.com/compose/)
@@ -11,7 +11,7 @@ and [Docker Compose](https://docs.docker.com/compose/)
 
 ### Requirements:
 
- * Debian Linux 9 Stretch (or something like this)
+ * Debian Linux 9 Stretch or newer (or something like this)
  * Email-server on it that can send emails (for example, `exim4`)
  * Installed [Docker](https://docs.docker.com/install/linux/docker-ce/debian/)
        and [Docker-compose](https://docs.docker.com/compose/install/#install-compose)
@@ -60,6 +60,10 @@ $ docker network create --subnet=172.212.0.0/16 nginx-proxy
 Run service:
 ```
 $ docker-compose up -d
+```
+or
+```
+$ make
 ```
 
 You also need configure `exim4` to allow it serving docker-containers.
@@ -113,6 +117,10 @@ Run service:
 ```
 $ docker-compose up -d
 ```
+or
+```
+$ make
+```
 
 *it will take some time, be patient
 
@@ -131,6 +139,34 @@ $ docker-compose up -d
  * `EMAIL_REPLY_TO` -- email that will be defined in header Reply-To in emails GitLab sends.
  * `EMAIL_SUBJECT_SUFFIX` -- prefix in emails GitLab sends.
  * `TIME_ZONE` -- time zone to show correct time in GitLab.
+
+
+### WebLate
+
+Go to the directory:
+```
+$ cd /srv/team-backoffice/weblate
+```
+
+Create `.env` file from example one:
+```
+$ cp .env.example .env
+```
+
+Set up all configs in `.env` file.
+
+Run service:
+```
+$ docker-compose up -d
+```
+or
+```
+$ make
+```
+
+##### Options in `.env` for GitLab
+
+*todo add options* 
 
 
 ### Redmine
@@ -155,6 +191,10 @@ $ bash updateconf.sh
 Run service:
 ```
 $ docker-compose up -d
+```
+or
+```
+$ make
 ```
 
 *it will take some time, be patient
@@ -190,6 +230,10 @@ Run service:
 ```
 $ docker-compose up -d
 ```
+or
+```
+$ make
+```
 
 ##### Options in `.env` for Bitwarden
 
@@ -214,58 +258,13 @@ into `/etc/exim4/update-exim4.conf.conf`.
 More information: https://github.com/dani-garcia/bitwarden_rs/wiki
 
 
-### TeamPass
-
-Go to the directory:
-```
-$ cd /srv/team-backoffice/teampass
-```
-
-Create `.env` file from example one:
-```
-$ cp .env.example .env
-```
-
-Set up all configs in `.env` file.
-
-Run service:
-```
-$ docker-compose up -d
-```
-
-Go to your https://`TEAMPASS_HOSTNAME` and follow steps there.
-During steps you have to set these options:
-
- * Absolute path to teampass folder: don't change it, keep default value
- * Full URL to teampass: `https://teampass.example.com` (use the domain in `TEAMPASS_HOSTNAME` in `.env`)
- * Database Host: `mysql`
- * Database Port: `3306`
- * Other Database fields: see your `.env` file
- * Absolute path to SaltKey: `/var/www/html/sk`
-
-Go to `Settings` -> `Email` and set up:
-
- * SMTP server address: the first IP of docker-network subnet (see above)
- * SMTP server port: `25`  (or change it according to your email server)
- * From: Email address: `teampass@example.com` (set email with domain of your email server)
- * From: Display name: `TeamPass MyTeam` (set display name you like)
-
-See TeamPass' documentation: https://teampass.readthedocs.io/en/latest/
-
-##### Options in `.env` for TeamPass
-
- * `TEAMPASS_HOSTNAME` -- domain of your TeamPass.
- * `LETSENCRYPT_EMAIL` -- email that will be used during getting SSL-certificates of Let's Encrypt.
- * `NETWORK` -- docker-network name which is the same as used in Nginx (see above).
- * `DB_NAME` -- database name that TeamPass uses.
- * `DB_USER` -- username to connect TeamPass' database.
- * `DB_PASS` -- password to connect TeamPass' database.
- * `DB_ROOT_PASS` -- password for `root` user of MySQL that TeamPass uses.
-
-
 ### How to update the services
 
 Go to the directory you want to update the service there and execute the command:
 ```
 $ docker-compose pull && docker-compose up -d && docker image prune -af
+```
+or
+```
+$ make upgrade_clean
 ```

@@ -21,7 +21,10 @@ redmine/plugins/
 redmine/themes/
 redmine/postgres_data/
 
-teampass/files/
-teampass/mysql_data/
+weblate/weblate_data/
+weblate/postgres_data/
+weblate/redis_data/
 
 notes.local.txt
+
+docker-compose.override.yml
