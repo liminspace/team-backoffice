@@ -1,7 +1,7 @@
 version: "3"
 services:
   bitwarden_rs:
-    image: mprasil/bitwarden:latest
+    image: bitwardenrs/server:latest
     restart: always
     environment:
       VIRTUAL_HOST: "${BITWARDEN_RS_HOSTNAME}"
