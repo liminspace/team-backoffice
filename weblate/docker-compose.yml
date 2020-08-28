@@ -11,6 +11,7 @@ services:
     env_file:
       - .env
     environment:
+      WEBLATE_SITE_DOMAIN: "${WEBLATE_HOSTNAME}"
       VIRTUAL_HOST: "${WEBLATE_HOSTNAME}"
       VIRTUAL_PORT: 8080
       LETSENCRYPT_HOST: "${WEBLATE_HOSTNAME}"
