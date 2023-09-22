@@ -1,7 +1,7 @@
 version: '3'
 services:
   weblate:
-    image: weblate/weblate
+    image: weblate/weblate:latest
     restart: always
     volumes:
       - weblate_data:/app/data
@@ -18,10 +18,10 @@ services:
       LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
 
   database:
-    image: postgres:11
+    image: postgres:12
     restart: always
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_12_data:/var/lib/postgresql/data
     env_file:
       - .env
 
@@ -41,5 +41,5 @@ networks:
 
 volumes:
   weblate_data: {}
-  postgres_data: {}
+  postgres_12_data: {}
   redis_data: {}

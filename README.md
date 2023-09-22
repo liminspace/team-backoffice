@@ -3,7 +3,7 @@ The recipe of easy installing [GitLab](https://about.gitlab.com/),
 [GitLab Registry](https://docs.gitlab.com/ee/user/project/container_registry.html),
 [WebLate](https://weblate.org/en/),
 [Redmine](https://www.redmine.org/),
-[Bitwarden](https://bitwarden.com/),
+[Vaultwarden](https://github.com/dani-garcia/vaultwarden),
 [Let's Encrypt](https://letsencrypt.org/) 
 using [Docker](https://www.docker.com/)
 and [Docker Compose](https://docs.docker.com/compose/)
@@ -210,13 +210,13 @@ $ make
  * `DB_PASS` -- password to connect Redmine's database.
 
 
-### Bitwarden (Rust server implementation)
+### Vaultwarden (Unofficial Bitwarden compatible server written in Rust)
 
-Project's repo: https://github.com/dani-garcia/bitwarden_rs
+Project's repo: https://github.com/dani-garcia/vaultwarden
 
 Go to the directory:
 ```
-$ cd /srv/team-backoffice/bitwarden_rs
+$ cd /srv/team-backoffice/vaultwarden
 ```
 
 Create `.env` file from example one:
@@ -235,27 +235,27 @@ or
 $ make
 ```
 
-##### Options in `.env` for Bitwarden
+##### Options in `.env` for Vaultwarden
 
- * `BITWARDEN_RS_HOSTNAME` -- domain of your Bitwarden.
+ * `VAULTWARDEN_HOSTNAME` -- domain of your Vaultwarden.
  * `LETSENCRYPT_EMAIL` -- email that will be used during getting SSL-certificates of Let's Encrypt.
  * `NETWORK` -- docker-network name which is the same as used in Nginx (see above).
  * `NETWORK_HOST_IP` -- the first IP of docker-network subnet (see above).
- * `BW_DOMAIN` -- URL (with protocol and domain) to Bitwarden.
- * `BW_SMTP_*` -- SMTP settings for mailing.
- * `BW_EMAIL_FROM` -- the email from which Bitwarden will send emails.
- * `BW_EMAIL_FROM_NAME` -- display name for `BW_EMAIL_FROM`.
- * `BW_ADMIN_TOKEN` -- security token to activate admin page.
- * `BW_SIGNUPS_ALLOWED` -- allow or deny to sign up new users.
- * `BW_INVITATIONS_ALLOWED` -- allow or deny to invite new users (even for admins).
- * `BW_ROCKET_LIMITS` -- Rocket's limits. https://rocket.rs/v0.4/guide/configuration/#data-limits
- * `BW_SHOW_PASSWORD_HINT` -- allow or deny to show password hint.
- * `BW_WEB_VAULT_ENABLED` -- allow or deny to web-version of vault.
+ * `VW_DOMAIN` -- URL (with protocol and domain) to Vaultwarden.
+ * `VW_SMTP_*` -- SMTP settings for mailing.
+ * `VW_EMAIL_FROM` -- the email from which Vaultwarden will send emails.
+ * `VW_EMAIL_FROM_NAME` -- display name for `BW_EMAIL_FROM`.
+ * `VW_ADMIN_TOKEN` -- security token to activate admin page.
+ * `VW_SIGNUPS_ALLOWED` -- allow or deny to sign up new users.
+ * `VW_INVITATIONS_ALLOWED` -- allow or deny to invite new users (even for admins).
+ * `VW_ROCKET_LIMITS` -- Rocket's limits. https://rocket.rs/v0.4/guide/configuration/#data-limits
+ * `VW_SHOW_PASSWORD_HINT` -- allow or deny to show password hint.
+ * `VW_WEB_VAULT_ENABLED` -- allow or deny to web-version of vault.
  
 If you have a problem with sending emails by using exim4 try to add option `IGNORE_SMTP_LINE_LENGTH_LIMIT=1` 
 into `/etc/exim4/update-exim4.conf.conf`.
 
-More information: https://github.com/dani-garcia/bitwarden_rs/wiki
+More information: https://github.com/dani-garcia/vaultwarden/wiki
 
 
 ### How to update the services
