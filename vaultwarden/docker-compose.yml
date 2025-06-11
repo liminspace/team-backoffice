@@ -1,4 +1,3 @@
-version: "3"
 services:
   vaultwarden:
     image: vaultwarden/server:latest
@@ -30,5 +29,5 @@ services:
 
 networks:
   default:
-    external:
-      name: ${NETWORK}
+    name: ${NETWORK}
+    external: true

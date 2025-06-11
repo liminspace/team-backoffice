@@ -1,4 +1,3 @@
-version: "3"
 services:
   redmine:
     image: redmine:latest
@@ -36,5 +35,5 @@ services:
 
 networks:
   default:
-    external:
-      name: ${NETWORK}
+    name: ${NETWORK}
+    external: true

@@ -59,7 +59,7 @@ $ docker network create --subnet=172.212.0.0/16 nginx-proxy
 
 Run service:
 ```
-$ docker-compose up -d
+$ docker compose up -d
 ```
 or
 ```
@@ -115,7 +115,7 @@ Set up all configs in `.env` file.
 
 Run service:
 ```
-$ docker-compose up -d
+$ docker compose up -d
 ```
 or
 ```
@@ -157,7 +157,7 @@ Set up all configs in `.env` file.
 
 Run service:
 ```
-$ docker-compose up -d
+$ docker compose up -d
 ```
 or
 ```
@@ -190,7 +190,7 @@ $ bash updateconf.sh
 
 Run service:
 ```
-$ docker-compose up -d
+$ docker compose up -d
 ```
 or
 ```
@@ -228,7 +228,7 @@ Set up all configs in `.env` file.
 
 Run service:
 ```
-$ docker-compose up -d
+$ docker compose up -d
 ```
 or
 ```
@@ -262,7 +262,7 @@ More information: https://github.com/dani-garcia/vaultwarden/wiki
 
 Go to the directory you want to update the service there and execute the command:
 ```
-$ docker-compose pull && docker-compose up -d && docker image prune -af
+$ docker compose pull && docker compose up -d && docker image prune -af
 ```
 or
 ```

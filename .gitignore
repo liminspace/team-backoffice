@@ -28,3 +28,4 @@ weblate/redis_data/
 notes.local.txt
 
 docker-compose.override.yml
+compose.override.yml
