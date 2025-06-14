@@ -1,6 +1,6 @@
 services:
   redmine:
-    image: redmine:latest
+    image: redmine:6.0
     depends_on:
       - postgres
     restart: always
@@ -24,14 +24,14 @@ services:
       - ./config/initializers/secret_token.rb:/usr/src/redmine/config/initializers/secret_token.rb
 
   postgres:
-    image: postgres:9.6
+    image: postgres:14
     restart: always
     environment:
       POSTGRES_DB: "${DB_NAME}"
       POSTGRES_USER: "${DB_USER}"
       POSTGRES_PASSWORD: "${DB_PASS}"
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - ./postgres_data_14:/var/lib/postgresql/data
 
 networks:
   default:

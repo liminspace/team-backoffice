@@ -1,6 +1,6 @@
 services:
   weblate:
-    image: weblate/weblate:latest
+    image: weblate/weblate:5.11
     restart: always
     volumes:
       - weblate_data:/app/data
