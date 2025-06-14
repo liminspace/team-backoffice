@@ -9,9 +9,11 @@ gitlab/data/
 
 nginx/conf.d/*
 !nginx/conf.d/conf.conf
-nginx/vhost.d/
 nginx/share_html/
 nginx/certs/
+nginx/acme/
+
+portainer/portainer_data/
 
 redmine/config/configuration.yml
 redmine/config/initializers/secret_token.rb
@@ -19,7 +21,7 @@ redmine/files/
 redmine/log/
 redmine/plugins/
 redmine/themes/
-redmine/postgres_data/
+redmine/postgres_data_14/
 
 weblate/weblate_data/
 weblate/postgres_data/
@@ -28,3 +30,4 @@ weblate/redis_data/
 notes.local.txt
 
 docker-compose.override.yml
+compose.override.yml

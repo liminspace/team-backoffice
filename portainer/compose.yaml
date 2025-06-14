@@ -1,0 +1,20 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:2.27.6
+    container_name: portainer
+    restart: always
+    expose:
+      - 9000
+    volumes:
+      - ./portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      VIRTUAL_HOST: "${PORTAINER_HOSTNAME}"
+      VIRTUAL_PORT: 9000
+      LETSENCRYPT_HOST: "${PORTAINER_HOSTNAME}"
+      LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
+
+networks:
+  default:
+    name: ${NETWORK}
+    external: true

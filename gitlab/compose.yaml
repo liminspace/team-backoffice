@@ -1,10 +1,9 @@
-version: "3"
 services:
   gitlab:
     hostname: gitlab
     container_name: gitlab
     restart: always
-    image: gitlab/gitlab-ce:latest
+    image: gitlab/gitlab-ce:17.5.5-ce.0
     extra_hosts:
       - "${GITLAB_HOSTNAME}:127.0.1.1"
       - "${REGISTRY_HOSTNAME}:127.0.1.1"
@@ -67,5 +66,5 @@ services:
 
 networks:
   default:
-    external:
-      name: "${NETWORK}"
+    name: ${NETWORK}
+    external: true

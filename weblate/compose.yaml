@@ -1,10 +1,10 @@
-version: '3'
 services:
   weblate:
-    image: weblate/weblate:latest
+    image: weblate/weblate:5.11
     restart: always
     volumes:
       - weblate_data:/app/data
+      - weblate_cache:/app/cache
     depends_on:
       - database
       - cache
@@ -18,15 +18,15 @@ services:
       LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
 
   database:
-    image: postgres:12
+    image: postgres:17
     restart: always
     volumes:
-      - postgres_12_data:/var/lib/postgresql/data
+      - postgres_17_data:/var/lib/postgresql/data
     env_file:
       - .env
 
   cache:
-    image: redis:4
+    image: redis:7
     restart: always
     volumes:
       - redis_data:/data
@@ -36,10 +36,11 @@ services:
 
 networks:
   default:
-    external:
-      name: "${NETWORK}"
+    name: ${NETWORK}
+    external: true
 
 volumes:
   weblate_data: {}
-  postgres_12_data: {}
+  weblate_cache: {}
+  postgres_17_data: {}
   redis_data: {}

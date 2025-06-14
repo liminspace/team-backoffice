@@ -1,7 +1,6 @@
-version: "3"
 services:
   vaultwarden:
-    image: vaultwarden/server:latest
+    image: vaultwarden/server:1.34.1
     restart: always
     environment:
       VIRTUAL_HOST: "${VAULTWARDEN_HOSTNAME}"
@@ -30,5 +29,5 @@ services:
 
 networks:
   default:
-    external:
-      name: ${NETWORK}
+    name: ${NETWORK}
+    external: true
