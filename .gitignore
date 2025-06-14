@@ -9,9 +9,9 @@ gitlab/data/
 
 nginx/conf.d/*
 !nginx/conf.d/conf.conf
-nginx/vhost.d/
 nginx/share_html/
 nginx/certs/
+nginx/acme/
 
 redmine/config/configuration.yml
 redmine/config/initializers/secret_token.rb
