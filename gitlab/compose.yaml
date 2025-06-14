@@ -3,7 +3,7 @@ services:
     hostname: gitlab
     container_name: gitlab
     restart: always
-    image: gitlab/gitlab-ce:17.5.5-ce.0
+    image: gitlab/gitlab-ce:18.0.2-ce.0
     extra_hosts:
       - "${GITLAB_HOSTNAME}:127.0.1.1"
       - "${REGISTRY_HOSTNAME}:127.0.1.1"
@@ -51,6 +51,13 @@ services:
         gitlab_rails['gitlab_email_display_name'] = '${EMAIL_DISPLAY_NAME}'
         gitlab_rails['gitlab_email_reply_to'] = '${EMAIL_REPLY_TO}'
         gitlab_rails['gitlab_email_subject_suffix'] = '${EMAIL_SUBJECT_SUFFIX}'
+
+        consul['enable'] = false
+        alertmanager['enable'] = false
+        sentinel['enable'] = false
+        prometheus['enable'] = false
+        postgres_exporter['enable'] = false
+        gitlab_kas['enable'] = false
 
       VIRTUAL_HOST: "${GITLAB_HOSTNAME},${REGISTRY_HOSTNAME}"
       LETSENCRYPT_HOST: "${GITLAB_HOSTNAME},${REGISTRY_HOSTNAME}"
